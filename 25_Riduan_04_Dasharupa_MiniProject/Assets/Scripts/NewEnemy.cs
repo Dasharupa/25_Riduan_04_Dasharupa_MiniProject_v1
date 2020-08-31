@@ -22,13 +22,13 @@ public class NewEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,10 +44,10 @@ public class NewEnemy : MonoBehaviour
                 Dead();
             }
         }
-    }
 
-    private void Dead()
-    {
-        Destroy(gameObject);
+    void Dead()
+        {
+            Destroy(gameObject);
+        }
     }
 }

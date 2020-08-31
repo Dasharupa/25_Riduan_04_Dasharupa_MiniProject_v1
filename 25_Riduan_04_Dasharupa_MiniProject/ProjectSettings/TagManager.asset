@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - Bullet
+  - Portal
+  - Portal2
+  - Enemy2
+  - EnemyBullet
+  - Enemy3
+  - EnemyBullet2
   layers:
   - Default
   - TransparentFX

@@ -22,4 +22,12 @@ public class BulletScript : MonoBehaviour
         rb.velocity = new Vector2 (velX, velY);
         Destroy(gameObject, 3f);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
