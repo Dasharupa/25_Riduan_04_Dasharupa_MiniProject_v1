@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
+            Destroy(Player);
         }
     }
 }

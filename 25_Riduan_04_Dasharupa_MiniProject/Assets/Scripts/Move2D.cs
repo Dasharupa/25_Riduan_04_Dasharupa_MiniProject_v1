@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Move2D : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Move2D : MonoBehaviour
     float velY;
     int click = 0;
     public float Health;
+    public GameObject Player;
 
     [Tooltip("Damage on enemy on each hit")]
     public int ShootingDamage;
@@ -39,6 +41,11 @@ public class Move2D : MonoBehaviour
         Move();
         animator.SetFloat("moveSpeed", moveSpeed);
         animator.SetInteger("Click", click);
+
+        if (HealthPoint <= 0)
+        {
+            SceneManager.LoadScene(4);
+        }
 
         Vector3 characterScale = transform.localScale;
         if(Input.GetAxis("Horizontal") < 0)
@@ -121,7 +128,7 @@ public class Move2D : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Enemy"))
         {
@@ -130,5 +137,48 @@ public class Move2D : MonoBehaviour
             Health -= EnemyScript.ContactDamage;
             GameManager.Instance.UpdateHealth(HealthPoint);
         }
+
+        if (collision.gameObject.tag.Equals("Enemy2"))
+        {
+            Boss2 EnemyScript = collision.gameObject.GetComponent<Boss2>();
+            HealthPoint -= EnemyScript.ContactDamage;
+            Health -= EnemyScript.ContactDamage;
+            GameManager.Instance.UpdateHealth(HealthPoint);
+        }
+
+        if (collision.gameObject.tag.Equals("Enemy3"))
+        {
+            Boss3 EnemyScript = collision.gameObject.GetComponent<Boss3>();
+            HealthPoint -= EnemyScript.ContactDamage;
+            Health -= EnemyScript.ContactDamage;
+            GameManager.Instance.UpdateHealth(HealthPoint);
+        }
+
+        if (collision.gameObject.tag.Equals("EnemyBullet"))
+        {
+            EnemyBullet EnemyScript = collision.gameObject.GetComponent<EnemyBullet>();
+            HealthPoint -= EnemyScript.ContactDamage;
+            Health -= EnemyScript.ContactDamage;
+            GameManager.Instance.UpdateHealth(HealthPoint);
+        }
+
+        if (collision.gameObject.tag.Equals("EnemyBullet2"))
+        {
+            HomingBullet EnemyScript = collision.gameObject.GetComponent<HomingBullet>();
+            HealthPoint -= EnemyScript.ContactDamage;
+            Health -= EnemyScript.ContactDamage;
+            GameManager.Instance.UpdateHealth(HealthPoint);
+        }
+
+        if (collision.gameObject.tag.Equals("Portal"))
+        {
+            SceneManager.LoadScene(2);                       
+        }
+
+        if (collision.gameObject.tag.Equals("Portal2"))
+        {
+            SceneManager.LoadScene(3);
+        }
+
     }
 }
